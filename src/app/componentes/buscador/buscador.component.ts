@@ -4,6 +4,7 @@ import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { pipe, Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { ConsultarProductosService } from '../../servicios/consultar-productos/consultar-productos.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,11 +18,12 @@ export class BuscadorComponent implements OnInit {
   public items;
   public categorias;
   public resultado;
-public mostar: boolean;
-
+  public mostar: boolean;
+  public buscarParametro;
 
   constructor(
-    private consultaService: ConsultarProductosService
+    private consultaService: ConsultarProductosService,
+    private activatedRoute: ActivatedRoute
   ) {
 
     this.form = new FormGroup({
@@ -31,19 +33,28 @@ public mostar: boolean;
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.buscarParametro = params.search;
+      console.log(this.buscarParametro);
+      if (this.buscarParametro) {
+        this.traerProductos(this.buscarParametro).subscribe(val => { this.mostar = true; });
+      }
+    });
+
   }
 
   get buscador(): AbstractControl { return this.form.get('buscador'); }
 
+
   public buscando() {
 
-    this.traerProductos().subscribe(val => { console.log(this.resultado); this.mostar = true; });
+    this.traerProductos(this.buscador.value).subscribe(val => { this.mostar = true; });
 
   }
 
-  public traerProductos(): Observable<any> {
+  public traerProductos(buscar): Observable<any> {
 
-    return this.consultaService.consultarProductos(this.buscador.value)
+    return this.consultaService.consultarProductos(buscar)
       .pipe(
         tap(response => {
           this.items = response.results.map((product, i) => ({
