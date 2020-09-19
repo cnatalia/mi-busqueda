@@ -1,0 +1,23 @@
+<div *ngIf="this.producto">
+  <div>
+    <img src="{{this.producto[0].item.picture}}" alt="">
+    <div>
+      <span>{{this.producto[0].item.condition}}</span>
+      <h1>{{this.producto[0].item.title}}</h1>
+      <form action="">
+        <input type="text">
+        <input type="text" disabled> {{this.producto[0].item.price.currency}}
+        <button>Comprar</button>
+      </form>
+    </div>
+  </div>
+
+  <div>
+    <h2>Descripcion de producto</h2>
+    <p>
+      {{this.producto[0].item.description}}
+    </p>
+  </div>
+
+
+</div>

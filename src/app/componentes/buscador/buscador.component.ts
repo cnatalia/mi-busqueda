@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
-import { ConsultarProductosService } from '../servicios/consultar-productos/consultar-productos.service';
+
 import { pipe, Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
-import { ProductosResponse } from '../modelos/consulta-productos-response';
+import { ConsultarProductosService } from '../../servicios/consultar-productos/consultar-productos.service';
+
 
 @Component({
   selector: 'app-buscador',
@@ -16,7 +17,7 @@ export class BuscadorComponent implements OnInit {
   public items;
   public categorias;
   public resultado;
-
+public mostar: boolean;
 
 
   constructor(
@@ -36,7 +37,7 @@ export class BuscadorComponent implements OnInit {
 
   public buscando() {
 
-    this.traerProductos().subscribe(val => { console.log(this.resultado); });
+    this.traerProductos().subscribe(val => { console.log(this.resultado); this.mostar = true; });
 
   }
 

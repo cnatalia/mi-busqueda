@@ -5,16 +5,22 @@ import { LibUtilidadesModule } from 'lib-utilidades';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BuscadorComponent } from './buscador/buscador.component';
+import { BuscadorComponent } from './componentes/buscador/buscador.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { VistaRapidaComponent } from './componentes/vista-rapida/vista-rapida.component';
+import { HomeComponent } from './componentes/home/home.component';
+import { VistaDetalladaComponent } from './componentes/vista-detallada/vista-detallada.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BuscadorComponent
+    BuscadorComponent,
+    VistaRapidaComponent,
+    HomeComponent,
+    VistaDetalladaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
