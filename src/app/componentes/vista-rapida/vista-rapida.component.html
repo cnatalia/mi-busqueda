@@ -1,10 +1,16 @@
-<a href=""  routerLink="/items/{{this.id}}">
-  <img src="{{this.imagen}}" alt="">
-  <div>
-    <span>{{this.precio}}</span>
-    <span>{{this.titulo}}</span>
+<app-buscador></app-buscador>
+
+<div *ngIf="this.mostar">
+  <div *ngFor="let product of this.resultado[0].items">
+    <a href="" routerLink="/items/{{this.product.id}}">
+      <img src="{{this.product.picture}}" alt="">
+      <div>
+        <span>{{this.product.price.amount}}</span>
+        <span>{{this.product.title}}</span>
+      </div>
+      <div>
+        ciudad
+      </div>
+    </a>
   </div>
-  <div>
-    ciudad
-  </div>
- </a>
+</div>

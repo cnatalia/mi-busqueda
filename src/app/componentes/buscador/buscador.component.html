@@ -10,12 +10,13 @@
         <li>{{item.q}}</li>
       </ul>
     </div>
-    <button (click)="this.buscando()"> buscar</button>
+    <a [routerLink]="['/items']" [queryParams]="{search: 'cargador'}" [fragment]="yyy">buscar</a>
+    <!-- <button (click)="this.buscando()"> buscar</button> -->
   </div>
 </form>
 
 
-<div *ngIf="this.mostar">
+<!-- <div *ngIf="this.mostar">
 
   <div *ngFor="let product of this.resultado[0].items">
     <app-vista-rapida [imagen]="product.picture" [precio]="product.price.amount" [titulo]="product.title"
@@ -23,4 +24,4 @@
     </app-vista-rapida>
 
   </div>
-</div>
+</div> -->

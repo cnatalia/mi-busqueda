@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { VistaRapidaComponent } from './componentes/vista-rapida/vista-rapida.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { VistaDetalladaComponent } from './componentes/vista-detallada/vista-detallada.component';
+import { ResultadosComponent } from './componentes/resultados/resultados.component';
 
 
 
@@ -20,7 +21,8 @@ import { VistaDetalladaComponent } from './componentes/vista-detallada/vista-det
     BuscadorComponent,
     VistaRapidaComponent,
     HomeComponent,
-    VistaDetalladaComponent
+    VistaDetalladaComponent,
+    ResultadosComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

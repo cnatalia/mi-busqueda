@@ -26,7 +26,5 @@ export class AutocompletarService {
     return this.http.get<T>(filePath);
   }
 
-
-
 }
 

@@ -1,9 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DetalleProductoService } from '../../servicios/detalle-producto/detalle-producto.service';
-import { DetalleResponse } from '../../modelos/detalle-response';
+
 import { Observable, zip } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
+
+import { DetalleResponse } from '../../modelos/detalle-response';
+import { DetalleProductoService } from '../../servicios/detalle-producto/detalle-producto.service';
 
 @Component({
   selector: 'app-vista-detallada',
@@ -29,6 +31,14 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    //     this.activatedRoute.queryParams.subscribe(params => {
+    //   this.buscarParametro = params.search;
+    //   console.log(this.buscarParametro);
+    //   if (this.buscarParametro) {
+    //     this.traerProductos(this.buscarParametro).subscribe(val => { this.mostar = true; });
+    //   }
+    // });
+
     const id = this.route.snapshot.paramMap.get('id');
     zip(
       this.detalleProductoService.getDetalleProducto(id)

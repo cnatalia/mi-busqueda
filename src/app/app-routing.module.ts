@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { BuscadorComponent } from './componentes/buscador/buscador.component';
 import { VistaDetalladaComponent } from './componentes/vista-detallada/vista-detallada.component';
+import { VistaRapidaComponent } from './componentes/vista-rapida/vista-rapida.component';
 
 
 const routes: Routes = [{
@@ -11,6 +13,10 @@ const routes: Routes = [{
 {
   path: 'items/:id',
   component: VistaDetalladaComponent
+},
+{
+  path: 'items',
+  component: VistaRapidaComponent
 }];
 
 @NgModule({

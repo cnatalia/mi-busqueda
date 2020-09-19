@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { pipe, Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
-import { ConsultarProductosService } from '../../servicios/consultar-productos/consultar-productos.service';
-import { ActivatedRoute } from '@angular/router';
-import { AutocompletarService } from '../../servicios/autocompletar/autocompletar.service';
+
 import { PrediccionResponse } from '../../modelos/prediccion-response';
+import { AutocompletarService } from '../../servicios/autocompletar/autocompletar.service';
+import { ConsultarProductosService } from '../../servicios/consultar-productos/consultar-productos.service';
 
 
 @Component({
@@ -42,13 +43,7 @@ export class BuscadorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.buscarParametro = params.search;
-      console.log(this.buscarParametro);
-      if (this.buscarParametro) {
-        this.traerProductos(this.buscarParametro).subscribe(val => { this.mostar = true; });
-      }
-    });
+
 
   }
 
@@ -57,6 +52,7 @@ export class BuscadorComponent implements OnInit {
 
 
   public buscando() {
+
 
     this.traerProductos(this.buscador.value).subscribe(val => { this.mostar = true; });
 
