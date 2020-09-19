@@ -5,6 +5,8 @@ import { pipe, Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { ConsultarProductosService } from '../../servicios/consultar-productos/consultar-productos.service';
 import { ActivatedRoute } from '@angular/router';
+import { AutocompletarService } from '../../servicios/autocompletar/autocompletar.service';
+import { PrediccionResponse } from '../../modelos/prediccion-response';
 
 
 @Component({
@@ -20,14 +22,21 @@ export class BuscadorComponent implements OnInit {
   public resultado;
   public mostar: boolean;
   public buscarParametro;
+  public prediccion;
 
   constructor(
     private consultaService: ConsultarProductosService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private autocompleteService: AutocompletarService
   ) {
 
     this.form = new FormGroup({
       buscador: new FormControl('')
+    });
+
+    this.buscador.valueChanges.subscribe(val => {
+      // tslint:disable-next-line:max-line-length
+      this.autocompleteService.getTimesInEmployment(val).subscribe(value => { console.log(value); this.prediccion = value.suggested_queries; });
     });
 
   }
@@ -42,6 +51,7 @@ export class BuscadorComponent implements OnInit {
     });
 
   }
+
 
   get buscador(): AbstractControl { return this.form.get('buscador'); }
 

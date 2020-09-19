@@ -4,6 +4,12 @@
     <input type="text" [formControl]="buscador" placeholder="holi">
     <!-- <lib-auto-complete  controlName="buscador">
     </lib-auto-complete> -->
+    
+    <div *ngIf="this.prediccion">
+      <ul *ngFor="let item of this.prediccion">
+        <li>{{item.q}}</li>
+      </ul>
+    </div>
     <button (click)="this.buscando()"> buscar</button>
   </div>
 </form>
@@ -12,8 +18,8 @@
 <div *ngIf="this.mostar">
 
   <div *ngFor="let product of this.resultado[0].items">
-    <app-vista-rapida [imagen]="product.picture" [precio]="product.price.amount"
-      [titulo]="product.title" [envioGratis]="product.freeShipping" [id]="product.id">
+    <app-vista-rapida [imagen]="product.picture" [precio]="product.price.amount" [titulo]="product.title"
+      [envioGratis]="product.freeShipping" [id]="product.id">
     </app-vista-rapida>
 
   </div>
