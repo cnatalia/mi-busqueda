@@ -4,12 +4,12 @@
   <div class="contiene-datos">
     <div class="destacado">
       <div class="contiene-imagen">
-        <img src="{{this.producto[0].item.picture}}" alt="">
+        <img src="{{this.producto.item.picture}}" alt="">
       </div>
 
       <div class="info">
-        <span>{{this.producto[0].item.condition}}</span>
-        <h1>{{this.producto[0].item.title}}</h1>
+        <span>{{this.producto.item.condition}}</span>
+        <h1>{{this.producto.item.title}}</h1>
         <form action="" [formGroup]="formComprar"  >
           
             <input currencyMask [options]="{  precision: '0' }" [formControl]="valor" type="text" disabled> 
@@ -21,7 +21,7 @@
     <div class="descripcion">
       <h2>Descripcion de producto</h2>
       <p>
-        {{this.producto[0].item.description}}
+        {{this.producto.item.description}}
       </p>
     </div>
   </div>

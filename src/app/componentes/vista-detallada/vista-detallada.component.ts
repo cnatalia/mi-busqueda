@@ -17,7 +17,7 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
 
   // tslint:disable-next-line:variable-name
   public _producto;
-  public producto;
+  public producto: DetalleResponse;
   public data = '';
   public detalle;
   public categoria;
@@ -72,8 +72,7 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
       tap(
 
         response => {
-
-          this.producto = Array(this._producto).map(value => ({
+          const array = Array(this._producto).map(value => ({
             author: {
               name: value.site_id,
               lastname: value.site_id
@@ -94,6 +93,8 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
             }
           }));
 
+
+          this.producto = Object.assign({}, array[0]);
           this.valor.setValue(this._producto.price);
         })
 
