@@ -2,7 +2,9 @@
   <div class="header">
     <img src="./../../../assets/imagenes/logo.png" alt="" width="53">
     <form action="" [formGroup]="form">
-
+    
+      <!-- <tpc-auto-complete [list]="cityList" [id]="'residence-city'" [options]="residenceCityOptions">
+          </tpc-auto-complete> -->
       <div class="fondo">
         <input type="text" [formControl]="buscador" placeholder="Nunca dejes de buscar">
         <div class="predicciones" *ngIf="this.prediccion && this.mostrarPrediccion">

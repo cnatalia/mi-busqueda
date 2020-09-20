@@ -27,6 +27,7 @@ export class BuscadorComponent implements OnInit {
   public prediccion;
   public productosOptions;
   public mostrarPrediccion = true;
+  public positionInCompanyOptions;
 
   constructor(
     private consultaService: ConsultarProductosService,
@@ -45,6 +46,20 @@ export class BuscadorComponent implements OnInit {
       });
     });
 
+
+    this.positionInCompanyOptions = new AutocompleteOptions({
+      clearOnSelect: false,
+      minCharacters: 3,
+      control: this.buscador,
+      maxResults: 4,
+      placeholder: 'Buscar',
+      mapFunction: positionInCompany => new AutocompleteItem({
+        id: positionInCompany.id,
+        value: positionInCompany.value,
+        prettyPrint: `${positionInCompany.value}`,
+      })
+
+    });
 
   }
 

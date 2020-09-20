@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+
 import { PrediccionResponse } from '../../modelos/prediccion-response';
 
 @Injectable({

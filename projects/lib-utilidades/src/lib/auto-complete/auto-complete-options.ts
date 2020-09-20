@@ -1,4 +1,5 @@
 import { AbstractControl } from '@angular/forms';
+
 import { AutocompleteItem } from './auto-complete-item';
 
 export class AutocompleteOptions {
@@ -26,6 +27,7 @@ export class AutocompleteOptions {
   isSelect?: boolean,
   maxResults?: number
  }) {
+
   this.clearOnSelect = options.clearOnSelect ? options.clearOnSelect : null;
   this.delayTime = options.delayTime ? options.delayTime : null;
   this.minCharacters = options.minCharacters ? options.minCharacters : null;
@@ -35,10 +37,12 @@ export class AutocompleteOptions {
   this.placeholder = options.placeholder ? options.placeholder : null;
   this.isSelect = options.isSelect && options.isSelect === true;
   this.maxResults = options.maxResults ? options.maxResults : null;
+
  }
 
  // tslint:disable-next-line:variable-name
  _assign(_options: AutocompleteOptions) {
+  console.log(_options);
   this.clearOnSelect = _options.clearOnSelect ? _options.clearOnSelect : this.clearOnSelect;
   this.delayTime = _options.delayTime ? _options.delayTime : this.delayTime;
   this.minCharacters = _options.minCharacters ? _options.minCharacters : this.minCharacters;
@@ -55,6 +59,7 @@ export class AutocompleteOptions {
   this.placeholder = _options.placeholder ? _options.placeholder : this.placeholder;
   this.isSelect = _options.isSelect && _options.isSelect === true;
   this.maxResults = _options.maxResults ? _options.maxResults : null;
+
  }
 
 }

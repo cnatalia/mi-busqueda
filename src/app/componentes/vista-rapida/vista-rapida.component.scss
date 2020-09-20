@@ -1,0 +1,80 @@
+.resultados {
+  max-width: 1200px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+  background-color: #fff;
+
+
+
+
+  .contenedor-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 4px;
+    margin-right: 16px;
+
+    img {
+      width: 100%;
+      object-fit: contain;
+      height: 100%;
+    }
+  }
+
+  .item {
+    padding: 16px;
+    display: flex;
+    align-content: space-around;
+
+    .informacion {
+      display: flex;
+      justify-content: start;
+      flex-direction: column;
+      color: #333;
+      padding-top: 20px;
+    }
+
+    .precio {
+      font-size: 24px;
+      margin-bottom: 32px;
+    }
+
+    .free_shipping {
+      &:after {
+        content: "";
+        background-image: url(../../../assets/imagenes/ic_shipping@2x.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        margin-left: 10px;
+
+      }
+    }
+
+    .titulo {
+      font-size: 18px;
+    }
+
+    .ciudad {
+      margin-left: auto;
+      margin-right: 5%;
+      font-size: 12px;
+      color: #666;
+      margin-top: 25px;
+    }
+  }
+
+
+
+  .separador {
+    height: 1px;
+    width: 98%;
+    background: #EEE;
+    margin: 0 auto;
+    display: block;
+  }
+}
