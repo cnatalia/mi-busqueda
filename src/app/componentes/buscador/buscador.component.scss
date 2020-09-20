@@ -13,16 +13,20 @@
 
 
   .fondo {
-    width: 80%;
+    width: 600px;
     padding: 8px 0px 8px;
 
     .predicciones {
       position: absolute;
+      width: 600px;
       background: #fff;
-      padding: 8px 0px;
-      margin-top: 8px;
-      li{
-       margin-bottom: 8px;
+      padding: 8px;
+
+      border:1px solid #EEE;
+
+      border-radius: 0px 0px 5px 5px;
+      li {
+        margin-bottom: 8px;
       }
     }
 
