@@ -24,6 +24,7 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line:variable-name
   public _categoria;
   public formComprar: FormGroup;
+  public isArray: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -86,7 +87,7 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
                 decimals: value.price
               },
               picture: value.pictures[0].url,
-              condition: value.condition,
+              condition: this.translateManual(value.condition),
               free_shipping: value.shipping.free_shipping,
               sold_quantity: value.sold_quantity,
               description: response.plain_text
@@ -105,10 +106,23 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
   public getRutaCategorias(buscar): Observable<any> {
     return this.consultarDetalleService.getRutaCategorias(buscar).pipe(
       tap(response => {
-        this._categoria = Array(response.filters[0].values[0]).map(val => ({
-          name: val.path_from_root.map(re => re.name)
-        }));
+        this._categoria = this.getCategorias(response);
+        this.isArray = typeof (this._categoria) === 'object';
       })
     );
+  }
+
+  public getCategorias(buscar) {
+
+    return buscar.filters[0].values[0].path_from_root ?
+      Array(buscar.filters[0].values[0]).map(val => ({
+        name: val.path_from_root.map(re => re.name)
+      })) : buscar.filters[0].values[0].name;
+
+  }
+
+  public translateManual(valor) {
+
+    return valor === 'new' ? 'Nuevo' : 'Usado';
   }
 }

@@ -78,9 +78,7 @@ export class VistaRapidaComponent implements OnInit {
 
           }));
 
-          this.categorias = Array(response).find(val => val.filters[0]) ?
-
-            this.getCategorias(response) : ' ';
+          this.categorias = Array(response).find(val => val.filters[0]) ? this.getCategorias(response) : ' ';
 
 
 

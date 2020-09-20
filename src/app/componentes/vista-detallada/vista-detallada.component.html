@@ -1,6 +1,6 @@
 <app-buscador></app-buscador>
 <div *ngIf="this.producto" class="contenedor detalle">
-  <app-miga-de-pan [categorias]="this.categoria"></app-miga-de-pan>
+  <app-miga-de-pan [categorias]="this.categoria" [isArray]="this.isArray"></app-miga-de-pan>
   <div class="contiene-datos">
     <div class="destacado">
       <div class="contiene-imagen">
@@ -8,7 +8,7 @@
       </div>
 
       <div class="info">
-        <span>{{this.producto.item.condition}}</span>
+        <span>{{this.producto.item.condition}} - {{this.producto.item.sold_quantity}} vendidos </span>
         <h1>{{this.producto.item.title}}</h1>
         <form action="" [formGroup]="formComprar"  >
           
