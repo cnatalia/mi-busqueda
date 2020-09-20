@@ -5,10 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { pipe, Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
+import { AutocompleteOptions, AutocompleteItem } from 'projects/lib-utilidades/src/public-api';
+
 import { PrediccionResponse } from '../../modelos/prediccion-response';
 import { AutocompletarService } from '../../servicios/autocompletar/autocompletar.service';
 import { ConsultarProductosService } from '../../servicios/consultar-productos/consultar-productos.service';
-
 
 @Component({
   selector: 'app-buscador',
@@ -24,6 +25,8 @@ export class BuscadorComponent implements OnInit {
   public mostar: boolean;
   public buscarParametro;
   public prediccion;
+  public productosOptions;
+  public mostrarPrediccion = true;
 
   constructor(
     private consultaService: ConsultarProductosService,
@@ -37,63 +40,27 @@ export class BuscadorComponent implements OnInit {
 
     this.buscador.valueChanges.subscribe(val => {
       // tslint:disable-next-line:max-line-length
-      this.autocompleteService.getTimesInEmployment(val).subscribe(value => { console.log(value); this.prediccion = value.suggested_queries; });
+      this.autocompleteService.getTimesInEmployment(val).subscribe(valor => {
+        this.prediccion = valor.suggested_queries;
+      });
     });
+
 
   }
 
   ngOnInit(): void {
 
+  }
 
+  public buscarEsteValor(valor) {
+
+    this.buscador.setValue(valor);
   }
 
 
   get buscador(): AbstractControl { return this.form.get('buscador'); }
 
 
-  public buscando() {
 
-
-    this.traerProductos(this.buscador.value).subscribe(val => { this.mostar = true; });
-
-  }
-
-  public traerProductos(buscar): Observable<any> {
-
-    return this.consultaService.consultarProductos(buscar)
-      .pipe(
-        tap(response => {
-          this.items = response.results.map((product, i) => ({
-            id: product.id,
-            title: product.title,
-            price: {
-              currency: product.installments.currency_id,
-              amount: product.installments.rate
-            },
-
-            picture: product.thumbnail,
-            conditions: product.condition,
-            freeShipping: product.shipping.free_shipping
-
-          }));
-          this.categorias = Array(response.available_filters[0]).find(res => res.id === 'category') ?
-
-            (Array(response.available_filters[0])
-              .map(cat => {
-                return cat.values.map(val => ({ name: val.name }));
-
-              })) : 'No disponible';
-
-          this.resultado = Array(response).map((product, i) => ({
-            author: {
-              name: product.site_id,
-              lastame: product.site_id
-            },
-            categories: this.categorias,
-            items: this.items
-          }));
-        })
-      );
-  }
 
 }

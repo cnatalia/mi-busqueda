@@ -1,19 +1,27 @@
-<form action="" [formGroup]="form">
+<div class="buscador">
+  <div class="header">
+    <img src="./../../../assets/imagenes/logo.png" alt="" width="53">
+    <form action="" [formGroup]="form">
 
-  <div class="form-group">
-    <input type="text" [formControl]="buscador" placeholder="holi">
-    <!-- <lib-auto-complete  controlName="buscador">
-    </lib-auto-complete> -->
-    
-    <div *ngIf="this.prediccion">
-      <ul *ngFor="let item of this.prediccion">
-        <li>{{item.q}}</li>
-      </ul>
-    </div>
-    <a [routerLink]="['/items']" [queryParams]="{search: 'cargador'}" [fragment]="yyy">buscar</a>
-    <!-- <button (click)="this.buscando()"> buscar</button> -->
+      <div class="fondo">
+        <input type="text" [formControl]="buscador" placeholder="Nunca dejes de buscar">
+        <div class="predicciones" *ngIf="this.prediccion && this.mostrarPrediccion">
+            <ul *ngFor="let item of this.prediccion">
+              <li (click)="this.buscarEsteValor(item.q)">{{item.q}}</li>
+            </ul>
+          </div>
+      </div>
+
+      <!-- <a [routerLink]="['/items']" [queryParams]="{search: this.buscador.value}"
+        (click)="this.mostrarPrediccion=false">buscar</a> -->
+      <button  [routerLink]="['/items']" [queryParams]="{search: this.buscador.value}" (click)="this.mostrarPrediccion=false"></button> 
+    </form>
   </div>
-</form>
+
+ 
+
+</div>
+
 
 
 <!-- <div *ngIf="this.mostar">

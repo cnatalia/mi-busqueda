@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import { Meta } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -34,18 +35,22 @@ export class VistaRapidaComponent implements OnInit {
   constructor(
     private consultaService: ConsultarProductosService,
     private activatedRoute: ActivatedRoute,
-    private memoria: DatosMemoriaService
+    private memoria: DatosMemoriaService,
+    private metaTagService: Meta
   ) { }
 
   ngOnInit() {
 
     this.activatedRoute.queryParams.subscribe(params => {
       this.buscarParametro = params.search;
+      this.metaTagService.updateTag({ name: 'keywords', content: `buscar, ${this.buscarParametro}, ${this.buscarParametro} rojo` });
+      this.metaTagService.updateTag({ name: 'description', content: `Encuentra los mejores ${this.buscarParametro}`});
+
+
       if (this.buscarParametro) {
         this.traerProductos(this.buscarParametro).subscribe(val => { console.log(this.resultado); this.mostar = true; });
       }
     });
-
   }
 
   public traerProductos(buscar): Observable<any> {

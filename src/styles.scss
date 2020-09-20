@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+
+
+input {
+  :focus {
+    outline: none;
+    outline-offset: 0px;
+  }
+}
+
+li{
+ list-style: none;
+}
+html,
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+
+}
