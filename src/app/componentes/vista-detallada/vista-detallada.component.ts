@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 
 import { Observable, zip } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
@@ -19,25 +20,33 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
   public producto;
   public data = '';
   public detalle;
+  public categoria;
+  // tslint:disable-next-line:variable-name
+  public _categoria;
+  public formComprar: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private detalleProductoService: DetalleProductoService,
+    private consultarDetalleService: DetalleProductoService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {
+
+    this.formComprar = new FormGroup({
+      item: new FormControl(''),
+      cantidad: new FormControl(''),
+      valor: new FormControl('')
+    });
+
+  }
+
+  get valor(): AbstractControl { return this.formComprar.get('valor'); }
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
   }
 
   ngOnInit(): void {
-    //     this.activatedRoute.queryParams.subscribe(params => {
-    //   this.buscarParametro = params.search;
-    //   console.log(this.buscarParametro);
-    //   if (this.buscarParametro) {
-    //     this.traerProductos(this.buscarParametro).subscribe(val => { this.mostar = true; });
-    //   }
-    // });
 
     const id = this.route.snapshot.paramMap.get('id');
     zip(
@@ -48,26 +57,22 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
       }),
       switchMap(() => this.armarProducto())
     ).subscribe(
-      info => {
-        console.log(this.producto);
-        // this.producto = this.armarProducto();
-        // this.data = info;
-        // console.log(this.data);
-        // console.log(this.producto);
-      },
+      info => { },
       err => console.error(err)
     );
-    // this.getProduct();
+
   }
 
 
   public armarProducto(): Observable<any> {
-
+    this.getRutaCategorias(this._producto.category_id).subscribe(val => this.categoria = this._categoria[0].name);
     const id = this.route.snapshot.paramMap.get('id');
 
     return this.detalleProductoService.getDescripcion(id).pipe(
       tap(
+
         response => {
+
           this.producto = Array(this._producto).map(value => ({
             author: {
               name: value.site_id,
@@ -81,15 +86,28 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
                 amount: value.price,
                 decimals: value.price
               },
-              picture: value.thumbnail,
+              picture: value.pictures[0].url,
               condition: value.condition,
               free_shipping: value.shipping.free_shipping,
               sold_quantity: value.sold_quantity,
               description: response.plain_text
             }
           }));
+
+          this.valor.setValue(this._producto.price);
         })
+
     );
 
+  }
+
+  public getRutaCategorias(buscar): Observable<any> {
+    return this.consultarDetalleService.getRutaCategorias(buscar).pipe(
+      tap(response => {
+        this._categoria = Array(response.filters[0].values[0]).map(val => ({
+          name: val.path_from_root.map(re => re.name)
+        }));
+      })
+    );
   }
 }

@@ -1,0 +1,23 @@
+.miga-de-pan{
+ color: #999;
+ font-size: 14px;
+
+ 
+ padding: 15px 0 20px;
+ background: #EEE;
+ li{
+  display: inline-block;
+  &:after{
+   content: '>';
+   display: inline-block;
+   margin: 0px 10px;
+
+  }
+  &:last-child{
+   &:after{
+    content: initial;
+ 
+   }
+  }
+ }
+}

@@ -10,6 +10,7 @@ import { ProductosResponse } from '../../modelos/consulta-productos-response';
 import { DetalleResponse } from '../../modelos/detalle-response';
 import { ConsultarProductosService } from '../../servicios/consultar-productos/consultar-productos.service';
 import { DatosMemoriaService } from '../../servicios/datos-memoria/datos-memoria.service';
+import { DetalleProductoService } from '../../servicios/detalle-producto/detalle-producto.service';
 
 @Component({
   selector: 'app-vista-rapida',
@@ -31,6 +32,7 @@ export class VistaRapidaComponent implements OnInit {
   public mostar: boolean;
   public buscarParametro;
   public prediccion;
+
   public form: FormGroup;
 
 
@@ -50,7 +52,7 @@ export class VistaRapidaComponent implements OnInit {
 
 
       if (this.buscarParametro) {
-        this.traerProductos(this.buscarParametro).subscribe(val => { console.log(this.resultado); this.mostar = true; });
+        this.traerProductos(this.buscarParametro).subscribe(val => { this.mostar = true; });
       }
     });
   }
@@ -64,8 +66,8 @@ export class VistaRapidaComponent implements OnInit {
             id: product.id,
             title: product.title,
             price: {
-              currency: product.installments.currency_id,
-              amount: product.installments.rate
+              currency: product.currency_id,
+              amount: product.price
             },
 
             picture: product.thumbnail,
@@ -74,13 +76,13 @@ export class VistaRapidaComponent implements OnInit {
             city: product.seller_address.state.name
 
           }));
-          this.categorias = Array(response.available_filters[0]).find(res => res.id === 'category') ?
 
-            (Array(response.available_filters[0])
-              .map(cat => {
-                return cat.values.map(val => ({ name: val.name }));
+          this.categorias = Array(response).find(val => val.filters[0]) ?
 
-              })) : 'No disponible';
+            Array(response.filters[0].values[0]).map(val => ({
+              name: val.path_from_root.map(re => re.name)
+            })) : 'no nay';
+
 
 
           const arr = Array(response).map((product, i) => ({
@@ -88,14 +90,18 @@ export class VistaRapidaComponent implements OnInit {
               name: product.site_id,
               lastname: product.site_id
             },
-            categories: this.categorias,
+            categories: this.categorias[i].name,
             items: this.items
           }));
+
+
           this.resultado = Object.assign({}, arr[0]);
-          // this.resultado = Object.assign({}, array[0]);
+          this.resultado.items = arr[0].items.slice(0, 4);
 
         })
       );
   }
+
+
 
 }
