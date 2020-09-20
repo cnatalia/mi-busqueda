@@ -32,6 +32,7 @@ export class VistaRapidaComponent implements OnInit {
   public mostar: boolean;
   public buscarParametro;
   public prediccion;
+  public isArray: boolean;
 
   public form: FormGroup;
 
@@ -79,9 +80,7 @@ export class VistaRapidaComponent implements OnInit {
 
           this.categorias = Array(response).find(val => val.filters[0]) ?
 
-            Array(response.filters[0].values[0]).map(val => ({
-              name: val.path_from_root.map(re => re.name)
-            })) : 'no nay';
+            this.getCategorias(response) : ' ';
 
 
 
@@ -90,18 +89,29 @@ export class VistaRapidaComponent implements OnInit {
               name: product.site_id,
               lastname: product.site_id
             },
-            categories: this.categorias[i].name,
+            // tslint:disable-next-line:max-line-length
+            categories: this.categorias[0].name ? (this.categorias[0].name.length !== 1 ? this.categorias[i].name : this.categorias) : this.categorias,
             items: this.items
           }));
 
 
+          // console.log(this.categorias[0].name.length);
           this.resultado = Object.assign({}, arr[0]);
           this.resultado.items = arr[0].items.slice(0, 4);
-
+          this.isArray = typeof (this.resultado.categories) === 'object';
         })
       );
   }
 
+
+  public getCategorias(buscar) {
+
+    return buscar.filters[0].values[0].path_from_root ?
+      Array(buscar.filters[0].values[0]).map(val => ({
+        name: val.path_from_root.map(re => re.name)
+      })) : buscar.filters[0].values[0].name;
+
+  }
 
 
 }

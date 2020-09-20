@@ -1,7 +1,7 @@
 <app-buscador></app-buscador>
 
 <div *ngIf="this.mostar" class="resultados contenedor">
-  <app-miga-de-pan [categorias]="this.resultado.categories"></app-miga-de-pan>
+  <app-miga-de-pan [categorias]="this.resultado.categories" [isArray]="this.isArray"></app-miga-de-pan>
   <div *ngFor="let product of this.resultado.items " class="resultado-items">
     <div class="item" >
       <a href="" routerLink="/items/{{this.product.id}}" class="contenedor-img">
