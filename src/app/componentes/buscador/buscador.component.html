@@ -8,7 +8,7 @@
       <div class="fondo">
         <input type="text" [formControl]="buscador" placeholder="Nunca dejes de buscar">
         <div class="predicciones" *ngIf="this.prediccion && this.mostrarPrediccion">
-            <ul *ngFor="let item of this.prediccion">
+            <ul *ngFor="let item of this.prediccion | slice:0:5; let i=index">
               <li (click)="this.buscarEsteValor(item.q)">{{item.q}}</li>
             </ul>
           </div>

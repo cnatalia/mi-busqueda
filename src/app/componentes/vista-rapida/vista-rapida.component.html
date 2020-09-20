@@ -1,18 +1,18 @@
 <app-buscador></app-buscador>
 
 <div *ngIf="this.mostar" class="resultados">
-  <div *ngFor="let product of this.resultado[0].items" class="resultado-items">
-    <a href="" routerLink="/items/{{this.product.id}}" class="item">
+ <div *ngFor="let product of this.resultado.items; let i=index "  class="resultado-items" >
+     <a href="" routerLink="/items/{{this.product.id}}" class="item" *ngIf="i<4">
       <div class="contenedor-img">
         <img src="{{this.product.picture}}" alt="" >
       </div>
      
       <div class="informacion">
-        <span class="precio" [ngClass]="{'free_shipping': this.product.freeShipping}">{{this.product.price.amount}}</span>
+        <span class="precio" [ngClass]="{'free_shipping': this.product.freeShipping}">{{this.product.price.amount | currency}}</span>
         <span class="titulo">{{this.product.title}}</span>
       </div>
       <div class="ciudad">
-        ciudad
+        {{this.product.city}}
       </div>
     </a>
     <div class="separador"></div>
