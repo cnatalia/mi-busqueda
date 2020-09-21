@@ -17,6 +17,7 @@ import { MigaDePanComponent } from './componentes/miga-de-pan/miga-de-pan.compon
 import { ResultadosComponent } from './componentes/resultados/resultados.component';
 import { VistaDetalladaComponent } from './componentes/vista-detallada/vista-detallada.component';
 import { VistaRapidaComponent } from './componentes/vista-rapida/vista-rapida.component';
+import { PageErrorComponent } from './componentes/page-error/page-error.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { VistaRapidaComponent } from './componentes/vista-rapida/vista-rapida.co
     HomeComponent,
     VistaDetalladaComponent,
     ResultadosComponent,
-    MigaDePanComponent
+    MigaDePanComponent,
+    PageErrorComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

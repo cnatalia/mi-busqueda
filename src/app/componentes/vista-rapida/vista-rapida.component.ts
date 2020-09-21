@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { Meta } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 
 import { ProductosResponse } from '../../modelos/consulta-productos-response';
 import { DetalleResponse } from '../../modelos/detalle-response';
@@ -41,7 +41,8 @@ export class VistaRapidaComponent implements OnInit {
     private consultaService: ConsultarProductosService,
     private activatedRoute: ActivatedRoute,
     private memoria: DatosMemoriaService,
-    private metaTagService: Meta
+    private metaTagService: Meta,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -53,7 +54,10 @@ export class VistaRapidaComponent implements OnInit {
 
 
       if (this.buscarParametro) {
-        this.traerProductos(this.buscarParametro).subscribe(val => { this.mostar = true; });
+        this.traerProductos(this.buscarParametro).subscribe(
+          val => { this.mostar = true; },
+          error => { this.router.navigateByUrl('/error'); }
+        );
       }
     });
   }

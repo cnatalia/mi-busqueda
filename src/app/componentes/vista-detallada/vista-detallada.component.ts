@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 
 import { Observable, zip } from 'rxjs';
@@ -30,7 +30,8 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private detalleProductoService: DetalleProductoService,
     private consultarDetalleService: DetalleProductoService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {
 
     this.formComprar = new FormGroup({
@@ -59,7 +60,7 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
       switchMap(() => this.armarProducto())
     ).subscribe(
       info => { },
-      err => console.error(err)
+      err => error => { this.router.navigateByUrl('/error'); }
     );
 
   }
