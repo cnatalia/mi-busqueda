@@ -1,0 +1,22 @@
+<div *ngIf="this.categorias" class="contenedor-miga">
+
+  <ul *ngIf="this.isArray" class="miga-de-pan">
+
+
+    <li *ngFor="let categoria of this.categorias">
+    
+    
+      <a href="https://listado.mercadolibre.com.ar/{{categoria}}" target="_blank">{{categoria}}</a>
+    </li>
+  </ul>
+
+  <ul class="miga-de-pan" *ngIf="!this.isArray">
+
+
+    <li>
+      <a href="https://listado.mercadolibre.com.ar/{{this.categorias}}" target="_blank"> {{this.categorias}}</a>
+
+    </li>
+
+  </ul>
+</div>

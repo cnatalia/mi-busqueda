@@ -1,5 +1,4 @@
 export interface ProductosResponse {
- resultado: {
   author: {
    name: string,
    lastname: string
@@ -12,10 +11,11 @@ export interface ProductosResponse {
     currency: string,
     amount: number,
     decimals: number
-   }
+   },
+   picture: string;
+   conditions: string;
+   freeShipping: boolean;
   };
-  picture: string;
-  conditions: string;
-  freeShipping: boolean;
- }[];
+
+
 }

@@ -1,0 +1,27 @@
+<app-buscador></app-buscador>
+<app-miga-de-pan [categorias]="this.mostar ? this.resultado.categories : ''" [isArray]="this.isArray"></app-miga-de-pan>
+<div *ngIf="this.mostar" class="resultados contenedor">
+  
+
+    <div *ngFor="let product of this.resultado.items " class="resultado-items">
+    <div class="item" >
+      <a href="" routerLink="/items/{{this.product.id}}" class="contenedor-img">
+        <img src="{{this.product.picture}}" alt="{{this.product.title}}">
+      </a>
+
+      <div class="informacion">
+        <span class="precio"
+          [ngClass]="{'free_shipping': this.product.freeShipping}" >{{this.product.price.amount | currency : 'USD' : 'symbol' : '1.0-0'}}</span>
+        <a href="" routerLink="/items/{{this.product.id}}"><span class="titulo">{{this.product.title}}</span></a>
+      </div>
+      <div class="ciudad">
+        {{this.product.city}}
+      </div>
+    </div>
+    <div class="separador"></div>
+  </div>
+
+
+
+
+</div>

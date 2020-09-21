@@ -1,0 +1,95 @@
+@import 'form';
+@import 'variables';
+
+.resultados {
+  .contenedor-img {
+    width:47%;
+    height: auto;
+    border-radius: 4px;
+    margin-right: 16px;
+
+    img {
+      width: 100%;
+      object-fit: contain;
+      height: 100%;
+      
+    }
+
+     @media (min-width: $grid-breakpoints-md) {
+ width: 180px;
+    height: 180px;
+      }
+  }
+
+  .item {
+    padding: 16px;
+    display: flex;
+    align-content: space-around;
+flex-wrap: wrap;
+
+    .informacion {
+      display: flex;
+      justify-content: start;
+      flex-direction: column;
+      color: #333;
+      padding-top: 20px;
+  width:47%;
+      @media (min-width: $grid-breakpoints-md) {
+
+      }
+    }
+
+    .precio {
+      font-size: 18px;
+      margin-bottom: 19px;
+      font-weight: 500;
+      @media (min-width: $grid-breakpoints-md) {
+ font-size: 24px;
+      }
+    }
+
+    .free_shipping {
+      &:after {
+        content: "";
+        background-image: url(../../../assets/imagenes/ic_shipping@2x.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        margin-left: 10px;
+
+      }
+    }
+
+    .titulo {
+      font-size: 18px;
+    }
+
+    .ciudad {
+      margin-left: auto;
+      margin-right: 5%;
+      font-size: 12px;
+      color: #666;
+      margin-top: 25px;
+    flex: 0 1 100%;
+
+    text-align: right;
+      @media (min-width: $grid-breakpoints-md) {
+text-align: inherit;
+flex: none;
+      }
+    }
+  }
+
+
+
+  .separador {
+    height: 1px;
+    width: 98%;
+    background: #EEE;
+    margin: 0 auto;
+    display: block;
+  }
+}
