@@ -12,6 +12,10 @@ const routes: Routes = [{
   component: BuscadorComponent
 },
 {
+  path: 'buscador',
+  component: BuscadorComponent
+},
+{
   path: 'items/:id',
   component: VistaDetalladaComponent
 },

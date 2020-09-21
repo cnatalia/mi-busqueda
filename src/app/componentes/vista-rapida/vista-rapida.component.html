@@ -1,5 +1,5 @@
 <app-buscador></app-buscador>
-<app-miga-de-pan [categorias]="this.resultado.categories" [isArray]="this.isArray"></app-miga-de-pan>
+<app-miga-de-pan [categorias]="this.mostar ? this.resultado.categories : ''" [isArray]="this.isArray"></app-miga-de-pan>
 <div *ngIf="this.mostar" class="resultados contenedor">
   
 

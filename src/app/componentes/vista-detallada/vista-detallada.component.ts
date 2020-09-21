@@ -56,6 +56,7 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
     ).pipe(
       tap(([detalle]) => {
         this._producto = detalle;
+
       }),
       switchMap(() => this.armarProducto())
     ).subscribe(
@@ -72,8 +73,9 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
 
     return this.detalleProductoService.getDescripcion(id).pipe(
       tap(
-
+        // http://localhost:4300/items/MLA627407919
         response => {
+          console.log(response);
           const array = Array(this._producto).map(value => ({
             author: {
               name: value.site_id,

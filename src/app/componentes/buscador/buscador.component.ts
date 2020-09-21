@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { pipe, Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
@@ -32,7 +32,8 @@ export class BuscadorComponent implements OnInit {
   constructor(
     private consultaService: ConsultarProductosService,
     private activatedRoute: ActivatedRoute,
-    private autocompleteService: AutocompletarService
+    private autocompleteService: AutocompletarService,
+    private route: Router
   ) {
 
     this.form = new FormGroup({
@@ -41,6 +42,7 @@ export class BuscadorComponent implements OnInit {
 
     this.buscador.valueChanges.subscribe(val => {
       // tslint:disable-next-line:max-line-length
+      this.mostrarPrediccion = true;
       this.autocompleteService.getTimesInEmployment(val).subscribe(valor => {
         this.prediccion = valor.suggested_queries;
       });
@@ -70,6 +72,15 @@ export class BuscadorComponent implements OnInit {
   public buscarEsteValor(valor) {
 
     this.buscador.setValue(valor);
+    this.mostrarPrediccion = false;
+  }
+
+  public buscar() {
+
+    if (this.buscador.value) {
+      this.route.navigate(['/items'], { queryParams: { search: this.buscador.value } });
+
+    }
   }
 
 

@@ -48,6 +48,7 @@ export class VistaRapidaComponent implements OnInit {
   ngOnInit() {
 
     this.activatedRoute.queryParams.subscribe(params => {
+      console.log(params);
       this.buscarParametro = params.search;
       this.metaTagService.updateTag({ name: 'keywords', content: `buscar, ${this.buscarParametro}, ${this.buscarParametro} rojo` });
       this.metaTagService.updateTag({ name: 'description', content: `Encuentra los mejores ${this.buscarParametro}` });
@@ -92,15 +93,16 @@ export class VistaRapidaComponent implements OnInit {
               lastname: product.site_id
             },
             // tslint:disable-next-line:max-line-length
-            categories: this.categorias[0].name ? (this.categorias[0].name.length !== 1 ? this.categorias[i].name : this.categorias) : this.categorias,
+            categories: this.categorias[0].name ? (this.categorias[0].name.length !== 1 ? this.categorias[i].name : this.categorias[0].name) : this.categorias,
             items: this.items
           }));
 
 
-          // console.log(this.categorias[0].name.length);
+
           this.resultado = Object.assign({}, arr[0]);
           this.resultado.items = arr[0].items.slice(0, 4);
           this.isArray = typeof (this.resultado.categories) === 'object';
+
         })
       );
   }

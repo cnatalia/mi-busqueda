@@ -41,7 +41,8 @@ flex-wrap: wrap;
 
     .precio {
       font-size: 18px;
-      margin-bottom: 22px;
+      margin-bottom: 19px;
+      font-weight: 500;
       @media (min-width: $grid-breakpoints-md) {
  font-size: 24px;
       }

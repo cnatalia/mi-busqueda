@@ -1,40 +1,49 @@
 @import 'form';
 @import 'variables';
 
-.contenedor-miga{
-     max-width: 1200px;
-    width: 100%;
-    display: block;
-    margin: 0 auto;
-     background: #EEE;
-padding-left: 16px;
-      @media (min-width: $grid-breakpoints-lg) {
-padding-left: 0;
-      }
+.contenedor-miga {
+  max-width: 1200px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  background: #EEE;
+  padding-left: 16px;
+
+  @media (min-width: $grid-breakpoints-lg) {
+    padding-left: 0;
+  }
 }
-.miga-de-pan{
- color: #999;
- font-size: 14px;
 
- 
- padding: 15px 0 20px;
+.miga-de-pan {
+  color: #999;
+  font-size: 14px;
 
- li{
-  display: inline-block;
-  a{
-   color: #666;
-  }
-  &:after{
-   content: '>';
-   display: inline-block;
-   margin: 0px 10px;
 
+  padding: 10px 0;
+
+  li {
+    display: inline-block;
+
+    a {
+      color: #666;
+    }
+
+    &:after {
+      content: '\e900';
+      font-family: 'icons';
+      display: inline-block;
+      margin: 0px 5px;
+      vertical-align: bottom;
+
+    }
+
+    &:last-child {
+      font-weight: bold;
+
+      &:after {
+        content: initial;
+
+      }
+    }
   }
-  &:last-child{
-   &:after{
-    content: initial;
- 
-   }
-  }
- }
 }

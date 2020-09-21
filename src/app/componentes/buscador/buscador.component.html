@@ -1,10 +1,8 @@
 <div class="buscador">
   <div class="header">
-    <img src="./../../../assets/imagenes/logo.png" alt="" width="53">
+    <img src="./../../../assets/imagenes/logo.png" alt="" width="53" [routerLink]="['/']">
     <form action="" [formGroup]="form">
-    
-      <!-- <tpc-auto-complete [list]="cityList" [id]="'residence-city'" [options]="residenceCityOptions">
-          </tpc-auto-complete> -->
+  
       <div class="fondo">
         <input type="text" [formControl]="buscador" placeholder="Nunca dejes de buscar">
         <div class="predicciones" *ngIf="this.prediccion && this.mostrarPrediccion">
@@ -13,10 +11,7 @@
             </ul>
           </div>
       </div>
-
-      <!-- <a [routerLink]="['/items']" [queryParams]="{search: this.buscador.value}"
-        (click)="this.mostrarPrediccion=false">buscar</a> -->
-      <button  [routerLink]="['/items']" [queryParams]="{search: this.buscador.value}" (click)="this.mostrarPrediccion=false"></button> 
+      <button  (click)="this.buscar()"></button> 
     </form>
   </div>
 
@@ -24,14 +19,3 @@
 
 </div>
 
-
-
-<!-- <div *ngIf="this.mostar">
-
-  <div *ngFor="let product of this.resultado[0].items">
-    <app-vista-rapida [imagen]="product.picture" [precio]="product.price.amount" [titulo]="product.title"
-      [envioGratis]="product.freeShipping" [id]="product.id">
-    </app-vista-rapida>
-
-  </div>
-</div> -->
