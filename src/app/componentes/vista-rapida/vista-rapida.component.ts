@@ -9,7 +9,6 @@ import { tap, catchError } from 'rxjs/operators';
 import { ProductosResponse } from '../../modelos/consulta-productos-response';
 import { DetalleResponse } from '../../modelos/detalle-response';
 import { ConsultarProductosService } from '../../servicios/consultar-productos/consultar-productos.service';
-import { DatosMemoriaService } from '../../servicios/datos-memoria/datos-memoria.service';
 import { DetalleProductoService } from '../../servicios/detalle-producto/detalle-producto.service';
 
 @Component({
@@ -40,7 +39,6 @@ export class VistaRapidaComponent implements OnInit {
   constructor(
     private consultaService: ConsultarProductosService,
     private activatedRoute: ActivatedRoute,
-    private memoria: DatosMemoriaService,
     private metaTagService: Meta,
     private router: Router
   ) { }
@@ -48,15 +46,15 @@ export class VistaRapidaComponent implements OnInit {
   ngOnInit() {
 
     this.activatedRoute.queryParams.subscribe(params => {
-      console.log(params);
+
       this.buscarParametro = params.search;
-      this.metaTagService.updateTag({ name: 'keywords', content: `buscar, ${this.buscarParametro}, ${this.buscarParametro} rojo` });
+      this.metaTagService.updateTag({ name: 'keywords', content: `buscar, ${this.buscarParametro}, ${this.buscarParametro} grande` });
       this.metaTagService.updateTag({ name: 'description', content: `Encuentra los mejores ${this.buscarParametro}` });
 
 
       if (this.buscarParametro) {
         this.traerProductos(this.buscarParametro).subscribe(
-          val => { this.mostar = true; },
+          val => { this.mostar = true; console.log(val); },
           error => { this.router.navigateByUrl('/error'); }
         );
       }
@@ -67,7 +65,6 @@ export class VistaRapidaComponent implements OnInit {
     return this.consultaService.consultarProductos(buscar)
       .pipe(
         tap(response => {
-          console.log(response);
           this.items = response.results.map((product, i) => ({
             id: product.id,
             title: product.title,
@@ -85,8 +82,6 @@ export class VistaRapidaComponent implements OnInit {
 
           this.categorias = Array(response).find(val => val.filters[0]) ? this.getCategorias(response) : ' ';
 
-
-
           const arr = Array(response).map((product, i) => ({
             author: {
               name: product.site_id,
@@ -96,8 +91,6 @@ export class VistaRapidaComponent implements OnInit {
             categories: this.categorias[0].name ? (this.categorias[0].name.length !== 1 ? this.categorias[i].name : this.categorias[0].name) : this.categorias,
             items: this.items
           }));
-
-
 
           this.resultado = Object.assign({}, arr[0]);
           this.resultado.items = arr[0].items.slice(0, 4);
@@ -116,6 +109,5 @@ export class VistaRapidaComponent implements OnInit {
       })) : buscar.filters[0].values[0].name;
 
   }
-
 
 }

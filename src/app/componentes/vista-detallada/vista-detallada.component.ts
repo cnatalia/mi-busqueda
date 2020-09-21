@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { Meta } from '@angular/platform-browser';
 
 import { Observable, zip } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
@@ -31,7 +32,8 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
     private detalleProductoService: DetalleProductoService,
     private consultarDetalleService: DetalleProductoService,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private metaTagService: Meta
   ) {
 
     this.formComprar = new FormGroup({
@@ -49,7 +51,6 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
     const id = this.route.snapshot.paramMap.get('id');
     zip(
       this.detalleProductoService.getDetalleProducto(id)
@@ -60,7 +61,13 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
       }),
       switchMap(() => this.armarProducto())
     ).subscribe(
-      info => { },
+      info => {
+        const key = this._producto.title.split(' ').join(',');
+
+        this.metaTagService.updateTag({ name: 'keywords', content: `${key}` });
+        this.metaTagService.updateTag({ name: 'description', content: `Encuentra los mejores ${this._producto.title.split(' ')}` });
+
+      },
       err => error => { this.router.navigateByUrl('/error'); }
     );
 
@@ -73,9 +80,7 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
 
     return this.detalleProductoService.getDescripcion(id).pipe(
       tap(
-        // http://localhost:4300/items/MLA627407919
         response => {
-          console.log(response);
           const array = Array(this._producto).map(value => ({
             author: {
               name: value.site_id,

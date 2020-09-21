@@ -15,7 +15,7 @@ export class MigaDePanComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-   
+
   }
 
 

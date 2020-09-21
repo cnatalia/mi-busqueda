@@ -5,8 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { pipe, Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
-import { AutocompleteOptions, AutocompleteItem } from 'projects/lib-utilidades/src/public-api';
-
 import { PrediccionResponse } from '../../modelos/prediccion-response';
 import { AutocompletarService } from '../../servicios/autocompletar/autocompletar.service';
 import { ConsultarProductosService } from '../../servicios/consultar-productos/consultar-productos.service';
@@ -47,23 +45,9 @@ export class BuscadorComponent implements OnInit {
         this.prediccion = valor.suggested_queries;
       });
     });
-
-
-    this.positionInCompanyOptions = new AutocompleteOptions({
-      clearOnSelect: false,
-      minCharacters: 3,
-      control: this.buscador,
-      maxResults: 4,
-      placeholder: 'Buscar',
-      mapFunction: positionInCompany => new AutocompleteItem({
-        id: positionInCompany.id,
-        value: positionInCompany.value,
-        prettyPrint: `${positionInCompany.value}`,
-      })
-
-    });
-
   }
+
+  get buscador(): AbstractControl { return this.form.get('buscador'); }
 
   ngOnInit(): void {
 
@@ -82,9 +66,6 @@ export class BuscadorComponent implements OnInit {
 
     }
   }
-
-
-  get buscador(): AbstractControl { return this.form.get('buscador'); }
 
 
 
