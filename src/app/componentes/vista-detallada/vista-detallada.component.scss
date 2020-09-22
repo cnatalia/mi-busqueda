@@ -25,10 +25,12 @@
 
     img {
       width: 100%;
+      height: 100%;
     }
 
     @media (min-width: $grid-breakpoints-md) {
       width: 680px;
+      max-height: 700px;
     }
   }
 
@@ -59,7 +61,8 @@
         }
       }
 
-      button {
+      .esperando,
+      .comprado {
         background: $blue;
         border: none;
         color: $white;
@@ -68,12 +71,18 @@
         font-size: 18px;
         cursor: pointer;
       }
+
+      .comprado {
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(184, 184, 184, 1);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(184, 184, 184, 1);
+        box-shadow: 10px 10px 5px 0px rgba(184, 184, 184, 1);
+      }
     }
 
     @media (min-width: $grid-breakpoints-md) {
       width: 40.5%;
       padding-left: 10%;
-      
+
     }
   }
 
@@ -92,6 +101,7 @@
       max-width: 680px;
       line-height: 24px;
     }
+
     @media (min-width: $grid-breakpoints-md) {
       margin-top: 100px;
     }
@@ -99,6 +109,6 @@
 
   @media (min-width: $grid-breakpoints-md) {
     margin-top: 0px;
-   
+
   }
 }

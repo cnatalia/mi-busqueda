@@ -26,6 +26,7 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
   public _categoria;
   public formComprar: FormGroup;
   public isArray: boolean;
+  public textoBoton = 'Comprar';
 
   constructor(
     private route: ActivatedRoute,

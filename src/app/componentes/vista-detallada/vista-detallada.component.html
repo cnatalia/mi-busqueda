@@ -14,7 +14,7 @@
         <form action="" [formGroup]="formComprar"  >
           
             <input currencyMask [options]="{  precision: '0' }" [formControl]="valor" type="text" disabled> 
-          <button>Comprar</button>
+          <button class="esperando" (click)="this.textoBoton='Que bueno que compres!'" [ngClass]="{ esperando: this.textoBoton=='Comprar', comprado: this.textoBoton !='Comprar'}">{{this.textoBoton}}</button>
         </form>
       </div>
     </div>

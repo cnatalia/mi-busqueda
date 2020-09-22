@@ -7,12 +7,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MigaDePanComponent implements OnInit {
 
+
   @Input() categorias = [];
   @Input() isArray;
 
+  constructor() {
 
-
-  constructor() { }
+  }
 
   ngOnInit(): void {
 
