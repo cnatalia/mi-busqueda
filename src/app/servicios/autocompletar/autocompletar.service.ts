@@ -15,7 +15,7 @@ export class AutocompletarService {
 
   constructor(private http: HttpClient) { }
 
-  getTimesInEmployment(valor): Observable<any> {
+  getSugerencias(valor): Observable<any> {
     return this.getCatalog<any>(`https://http2.mlstatic.com/resources/sites/MCO/autosuggest?showFilters=true&limit=6&api_version=2&q=${valor}`);
   }
 
