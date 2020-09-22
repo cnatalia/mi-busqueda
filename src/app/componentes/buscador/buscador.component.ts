@@ -19,11 +19,9 @@ export class BuscadorComponent implements OnInit {
   public form: FormGroup;
   public items;
   public categorias;
-  public resultado;
   public mostar: boolean;
   public buscarParametro;
   public prediccion;
-  public productosOptions;
   public mostrarPrediccion = true;
 
   public text = 'no clicks yet';

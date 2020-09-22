@@ -46,7 +46,6 @@ export class DetalleProductoService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.log(error.message);
     return Observable.throw(error.message);
   }
 

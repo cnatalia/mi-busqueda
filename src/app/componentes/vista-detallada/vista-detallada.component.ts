@@ -19,7 +19,6 @@ export class VistaDetalladaComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line:variable-name
   public _producto;
   public producto: DetalleResponse;
-  public data = '';
   public detalle;
   public categoria;
   // tslint:disable-next-line:variable-name

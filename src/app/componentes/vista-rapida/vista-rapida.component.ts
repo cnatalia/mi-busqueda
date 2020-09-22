@@ -54,7 +54,7 @@ export class VistaRapidaComponent implements OnInit {
 
       if (this.buscarParametro) {
         this.traerProductos(this.buscarParametro).subscribe(
-          val => { this.mostar = true; console.log(val); },
+          val => { this.mostar = true; },
           error => { this.router.navigateByUrl('/error'); }
         );
       }
