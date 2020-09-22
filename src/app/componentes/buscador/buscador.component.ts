@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -19,19 +19,26 @@ export class BuscadorComponent implements OnInit {
   public form: FormGroup;
   public items;
   public categorias;
-  public resultado;
   public mostar: boolean;
   public buscarParametro;
   public prediccion;
-  public productosOptions;
   public mostrarPrediccion = true;
-  public positionInCompanyOptions;
+
+  public text = 'no clicks yet';
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.prediccion = false;
+    }
+  }
 
   constructor(
     private consultaService: ConsultarProductosService,
     private activatedRoute: ActivatedRoute,
     private autocompleteService: AutocompletarService,
-    private route: Router
+    private route: Router,
+    private eRef: ElementRef
   ) {
 
     this.form = new FormGroup({
@@ -57,6 +64,7 @@ export class BuscadorComponent implements OnInit {
 
     this.buscador.setValue(valor);
     this.mostrarPrediccion = false;
+    this.route.navigate(['/items'], { queryParams: { search: this.buscador.value } });
   }
 
   public buscar() {

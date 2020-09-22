@@ -1,0 +1,10 @@
+<div [class.hidden]="!show">
+  <div class="loader" *ngIf="show">
+    <div class="hollow-dots-spinner" :style="spinnerStyle">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="message">Espera unos segundos...</div>
+  </div>
+</div>

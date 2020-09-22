@@ -31,10 +31,10 @@
     .predicciones {
       position: absolute;
       width: 100%;
-      background: #fff;
+      background: $white;
 
       padding: 12px 8px 8px 15px;
-      border: 1px solid #EEE;
+      border: 1px solid $gray-light;
 
       border-radius: 0px 0px 5px 5px;
 
@@ -74,7 +74,7 @@
       border-radius: 0 4px 4px 0;
       background-image: url(/assets/imagenes/search.png);
       cursor: pointer;
-      background-color: #EEE;
+      background-color: $gray-light;
       background-size: 50%;
       height: 32px;
       border: none;

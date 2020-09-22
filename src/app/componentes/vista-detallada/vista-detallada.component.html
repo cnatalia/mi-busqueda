@@ -5,7 +5,7 @@
   <div class="contiene-datos">
     <div class="destacado">
       <div class="contiene-imagen">
-        <img src="{{this.producto.item.picture}}" alt="{{this.producto.item.title}}">
+        <img src="{{this.producto.item.picture}}" alt="{{this.producto.item.title}}" title="{{this.producto.item.title}}">
       </div>
 
       <div class="info">
@@ -14,7 +14,7 @@
         <form action="" [formGroup]="formComprar"  >
           
             <input currencyMask [options]="{  precision: '0' }" [formControl]="valor" type="text" disabled> 
-          <button>Comprar</button>
+          <button class="esperando" (click)="this.textoBoton='Que bueno que compres!'" [ngClass]="{ esperando: this.textoBoton=='Comprar', comprado: this.textoBoton !='Comprar'}">{{this.textoBoton}}</button>
         </form>
       </div>
     </div>
@@ -28,3 +28,4 @@
   </div>
 
 </div>
+
