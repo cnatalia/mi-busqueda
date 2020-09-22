@@ -58,7 +58,7 @@ export class BuscadorComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       this.mostrarPrediccion = true;
       if (val !== '') {
-        this.autocompleteService.getTimesInEmployment(val).subscribe(valor => {
+        this.autocompleteService.getSugerencias(val).subscribe(valor => {
           this.itemList = valor.suggested_queries;
           this.prediccion = valor.suggested_queries;
         });
@@ -90,21 +90,28 @@ export class BuscadorComponent implements OnInit {
 
 
   inputTextKeyUp(event: KeyboardEvent) {
-    if (event.key === 'ArrowDown') {
-      this.highlightedItem = this.highlightedItem + 1 >= this.itemList.length ? 0 : this.highlightedItem + 1;
-
-    } else if (event.key === 'ArrowUp') {
-
-      this.highlightedItem = this.highlightedItem - 1 < 0 ? this.itemList.length - 1 : this.highlightedItem - 1;
-
-    } else if (event.key === 'Enter' && this.itemList.length > 0) {
-      // Enter, select the element
-
-      const element = this.itemList[this.highlightedItem].q;
-      this.buscador.setValue(element);
+    if (event.key === 'Enter' && this.buscador.value && this.highlightedItem === -1) {
+      this.buscador.setValue(this.buscador.value);
       this.mostrarPrediccion = false;
+    } else {
+      if (event.key === 'ArrowDown') {
+        this.highlightedItem = this.highlightedItem + 1 >= this.itemList.length ? 0 : this.highlightedItem + 1;
 
+      } else if (event.key === 'ArrowUp') {
+
+        this.highlightedItem = this.highlightedItem - 1 < 0 ? this.itemList.length - 1 : this.highlightedItem - 1;
+
+      } else if (event.key === 'Enter' && this.itemList.length > 0) {
+        // Enter, select the element
+        const element = this.itemList[this.highlightedItem].q;
+        this.buscador.setValue(element);
+        this.highlightedItem = -1;
+        this.mostrarPrediccion = false;
+
+      }
     }
+
+
   }
 
 
