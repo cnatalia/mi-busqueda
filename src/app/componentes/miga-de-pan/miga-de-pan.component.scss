@@ -6,7 +6,7 @@
   width: 100%;
   display: block;
   margin: 0 auto;
-  background: #EEE;
+  background: $gray-light;
   padding-left: 16px;
 
   @media (min-width: $grid-breakpoints-lg) {
@@ -15,7 +15,7 @@
 }
 
 .miga-de-pan {
-  color: #999;
+  color: $gray-middle-light;
   font-size: 14px;
 
 
@@ -25,7 +25,7 @@
     display: inline-block;
 
     a {
-      color: #666;
+      color: $gray-dark;
     }
 
     &:after {

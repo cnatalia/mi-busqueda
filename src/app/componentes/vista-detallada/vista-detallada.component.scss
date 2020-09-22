@@ -2,7 +2,7 @@
 @import 'variables';
 
 .detalle {
-  color: #333;
+  color: $gray-super-dark;
 
   .destacado {
     display: flex;
@@ -52,7 +52,7 @@
         text-align: left !important;
         border: none;
         background: transparent;
-        color: #333 !important;
+        color: $gray-super-dark !important;
 
         @media (min-width: $grid-breakpoints-md) {
           font-size: 46px;
@@ -60,9 +60,9 @@
       }
 
       button {
-        background: #3483FA;
+        background: $blue;
         border: none;
-        color: #fff;
+        color: $white;
         height: 40px;
         border-radius: 5px;
         font-size: 18px;
