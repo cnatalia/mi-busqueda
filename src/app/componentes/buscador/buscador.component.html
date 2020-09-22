@@ -1,13 +1,13 @@
 <div class="buscador">
   <div class="header">
-    <img src="/assets/imagenes/logo.png" title="Mi Busqueda" alt="Mi Busqueda" width="53" [routerLink]="['/']">
+    <img src="/assets/imagenes/logo.png" title="Mi Busqueda" alt="Mi Busqueda" width="53" [routerLink]="['/']" class="goHome">
     <form action="" [formGroup]="form">
-  
-      <div class="fondo">
-        <input type="text" [formControl]="buscador" placeholder="Nunca dejes de buscar">
+      <div class="wraper" >
+        <input type="text" [formControl]="buscador" placeholder="Nunca dejes de buscar" (keydown)="this.inputTextKeyUp($event)"> 
+    
         <div class="predicciones" *ngIf="this.prediccion && this.mostrarPrediccion">
             <ul *ngFor="let item of this.prediccion | slice:0:5; let i=index">
-              <li (click)="this.buscarEsteValor(item.q)">{{item.q}}</li>
+              <li (click)="this.buscarEsteValor(item.q)" [class.active]="i === highlightedItem">{{item.q}}</li>
             </ul>
           </div>
       </div>
