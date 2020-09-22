@@ -57,6 +57,7 @@ export class BuscadorComponent implements OnInit {
 
     this.buscador.setValue(valor);
     this.mostrarPrediccion = false;
+    this.route.navigate(['/items'], { queryParams: { search: this.buscador.value } });
   }
 
   public buscar() {

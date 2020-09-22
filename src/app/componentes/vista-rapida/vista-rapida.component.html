@@ -6,7 +6,7 @@
     <div *ngFor="let product of this.resultado.items " class="resultado-items">
     <div class="item" >
       <a href="" routerLink="/items/{{this.product.id}}" class="contenedor-img">
-        <img src="{{this.product.picture}}" alt="{{this.product.title}}">
+        <img src="{{this.product.picture}}" alt="{{this.product.title}}" title="{{this.product.title}}">
       </a>
 
       <div class="informacion">
@@ -20,8 +20,4 @@
     </div>
     <div class="separador"></div>
   </div>
-
-
-
-
 </div>
