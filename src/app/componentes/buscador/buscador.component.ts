@@ -9,6 +9,12 @@ import { PrediccionResponse } from '../../modelos/prediccion-response';
 import { AutocompletarService } from '../../servicios/autocompletar/autocompletar.service';
 import { ConsultarProductosService } from '../../servicios/consultar-productos/consultar-productos.service';
 
+export enum KEY_CODE {
+  DOWN_ARROW = 40,
+  UP_ARROW = 38
+}
+
+
 @Component({
   selector: 'app-buscador',
   templateUrl: './buscador.component.html',
@@ -23,6 +29,8 @@ export class BuscadorComponent implements OnInit {
   public buscarParametro;
   public prediccion;
   public mostrarPrediccion = true;
+  highlightedItem = -1;
+  itemList;
 
   public text = 'no clicks yet';
 
@@ -32,6 +40,7 @@ export class BuscadorComponent implements OnInit {
       this.prediccion = false;
     }
   }
+
 
   constructor(
     private consultaService: ConsultarProductosService,
@@ -48,9 +57,12 @@ export class BuscadorComponent implements OnInit {
     this.buscador.valueChanges.subscribe(val => {
       // tslint:disable-next-line:max-line-length
       this.mostrarPrediccion = true;
-      this.autocompleteService.getTimesInEmployment(val).subscribe(valor => {
-        this.prediccion = valor.suggested_queries;
-      });
+      if (val !== '') {
+        this.autocompleteService.getTimesInEmployment(val).subscribe(valor => {
+          this.itemList = valor.suggested_queries;
+          this.prediccion = valor.suggested_queries;
+        });
+      }
     });
   }
 
@@ -76,6 +88,24 @@ export class BuscadorComponent implements OnInit {
   }
 
 
+
+  inputTextKeyUp(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown') {
+      this.highlightedItem = this.highlightedItem + 1 >= this.itemList.length ? 0 : this.highlightedItem + 1;
+
+    } else if (event.key === 'ArrowUp') {
+
+      this.highlightedItem = this.highlightedItem - 1 < 0 ? this.itemList.length - 1 : this.highlightedItem - 1;
+
+    } else if (event.key === 'Enter' && this.itemList.length > 0) {
+      // Enter, select the element
+
+      const element = this.itemList[this.highlightedItem].q;
+      this.buscador.setValue(element);
+      this.mostrarPrediccion = false;
+
+    }
+  }
 
 
 }

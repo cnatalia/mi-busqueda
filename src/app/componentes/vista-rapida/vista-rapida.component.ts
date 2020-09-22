@@ -35,6 +35,7 @@ export class VistaRapidaComponent implements OnInit {
 
   public form: FormGroup;
 
+  public temporal;
 
   constructor(
     private consultaService: ConsultarProductosService,
@@ -55,7 +56,7 @@ export class VistaRapidaComponent implements OnInit {
       if (this.buscarParametro) {
         this.traerProductos(this.buscarParametro).subscribe(
           val => { this.mostar = true; },
-          error => { this.router.navigateByUrl('/error'); }
+          error => { console.log(error); this.router.navigateByUrl('/error'); }
         );
       }
     });
@@ -65,6 +66,7 @@ export class VistaRapidaComponent implements OnInit {
     return this.consultaService.consultarProductos(buscar)
       .pipe(
         tap(response => {
+
           this.items = response.results.map((product, i) => ({
             id: product.id,
             title: product.title,
@@ -73,7 +75,7 @@ export class VistaRapidaComponent implements OnInit {
               amount: product.price
             },
 
-            picture: product.thumbnail,
+            picture: product.thumbnail.replace('-I.jpg', '-V.jpg'),
             conditions: product.condition,
             freeShipping: product.shipping.free_shipping,
             city: product.seller_address.state.name
