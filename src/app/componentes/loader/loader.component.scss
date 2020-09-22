@@ -30,15 +30,15 @@
 }
 
 .hollow-dots-spinner {
-  height: 15px;
-  width: calc(30px * 3);
+  height: 50px;
+  width: 190px;
 }
 
 .hollow-dots-spinner .dot {
-  width: 15px;
-  height: 15px;
-  margin: 0 calc(15px / 2);
-  border: calc(15px / 5) solid $yellow-color;
+  width: 25px;
+  height: 25px;
+  margin: 0 calc(9px / 2);
+  border: calc(20px / 1) solid $yellow-color;
   border-radius: 50%;
   float: left;
   transform: scale(0);
