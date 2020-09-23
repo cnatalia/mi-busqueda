@@ -3,13 +3,12 @@
 
 
 @font-face {
-  font-family: roboto;
-  src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
-}
-
-@font-face {
-  font-family: roboto;
-  src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+  font-family: 'roboto';
+  src: url('/assets/fuentes/roboto/Roboto-Regular.eot'); /* IE9 Compat Modes */
+  src: url('/assets/fuentes/roboto/Roboto-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/assets/fuentes/roboto/Roboto-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/assets/fuentes/roboto/Roboto-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/assets/fuentes/roboto/Roboto-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 
  @font-face {
